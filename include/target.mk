@@ -51,9 +51,13 @@ DEFAULT_PACKAGES.nas:=\
 	mdadm
 # For router targets
 DEFAULT_PACKAGES.router:=\
-	dnsmasq-full \
+	dnsmasq \
 	firewall \
+	ip6tables \
 	iptables \
+	kmod-ipt-offload \
+	odhcp6c \
+	odhcpd-ipv6only \
 	ppp \
 	ppp-mod-pppoe
 # For easy usage
