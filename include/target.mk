@@ -31,16 +31,6 @@ else
 DEFAULT_PACKAGES+=busybox procd
 endif
 
-# include ujail on systems with enough storage
-ifeq ($(CONFIG_SMALL_FLASH),)
-DEFAULT_PACKAGES+=procd-ujail
-endif
-
-# include seccomp ld-preload hooks if kernel supports it
-ifneq ($(CONFIG_SECCOMP),)
-DEFAULT_PACKAGES+=procd-seccomp
-endif
-
 # For the basic set
 DEFAULT_PACKAGES.basic:=
 # For nas targets
@@ -51,30 +41,15 @@ DEFAULT_PACKAGES.nas:=\
 	mdadm
 # For router targets
 DEFAULT_PACKAGES.router:=\
-	dnsmasq \
+	dnsmasq-full \
 	firewall \
-	ip6tables \
 	iptables \
-	kmod-ipt-offload \
-	odhcp6c \
-	odhcpd-ipv6only \
 	ppp \
-	ppp-mod-pppoe
-# For easy usage
-DEFAULT_PACKAGES.tweak:=\
-        UA2F \
-	block-mount \
-	coremark \
-	kmod-tun \
-	default-settings \
-	kmod-ipt-raw \
-	kmod-nf-nathelper \
-	kmod-nf-nathelper-extra \
-	luci \
-        luci-newapi \
-	luci-app-upnp \
-	luci-app-ttyd \
-	luci-app-cpufreq \
+	ppp-mod-pppoe \
+	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
+	default-settings luci luci-app-upnp luci-app-autoreboot \
+	luci-app-filetransfer \
+	luci-app-ramfree luci-app-cpufreq \
 	luci-app-turboacc 
 
 ifneq ($(DUMP),)
@@ -107,9 +82,6 @@ else
     -include ./$(SUBTARGET)/target.mk
   endif
 endif
-
-# Add tweaked packages
-DEFAULT_PACKAGES += $(DEFAULT_PACKAGES.tweak)
 
 # Add device specific packages (here below to allow device type set from subtarget)
 DEFAULT_PACKAGES += $(DEFAULT_PACKAGES.$(DEVICE_TYPE))
