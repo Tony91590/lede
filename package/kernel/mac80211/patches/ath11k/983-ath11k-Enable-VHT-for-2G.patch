@@ -20,7 +20,7 @@
 +		band->vht_cap = ath11k_create_vht_cap(ar, rate_cap_tx_chainmask,
 +						      rate_cap_rx_chainmask);
  	}
-
+ 
  	if (cap->supported_bands & WMI_HOST_WLAN_5G_CAP && !ar->supports_6ghz) {
 --- a/drivers/net/wireless/ath/ath11k/wmi.c
 +++ b/drivers/net/wireless/ath/ath11k/wmi.c
