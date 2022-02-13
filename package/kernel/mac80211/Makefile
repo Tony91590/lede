@@ -10,10 +10,10 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=mac80211
 
-PKG_VERSION:=5.10.42-1
-PKG_RELEASE:=3
-PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v5.10.42/
-PKG_HASH:=6876520105240844fdb32d1dcdf2bfdea291a37a96f16c892fda3776ba714fcb
+PKG_VERSION:=5.10.68-1
+PKG_RELEASE:=1
+PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v5.10.68/
+PKG_HASH:=bba161b0084590c677a84b80993709e388a3c478f29ed0c475d4fce1b9162968
 
 PKG_SOURCE:=backports-$(PKG_VERSION).tar.xz
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/backports-$(PKG_VERSION)
@@ -443,15 +443,9 @@ config-$(call config_package,rsi91x-sdio) += RSI_SDIO
 
 config-$(CONFIG_LEDS_TRIGGERS) += MAC80211_LEDS
 
-C_DEFINES=
-
-ifeq ($(BUILD_VARIANT),smallbuffers)
-	C_DEFINES+= -DCONFIG_ATH10K_SMALLBUFFERS
-endif
-
 MAKE_OPTS:= -C "$(PKG_BUILD_DIR)" \
 	$(KERNEL_MAKE_FLAGS) \
-	EXTRA_CFLAGS="-I$(PKG_BUILD_DIR)/include $(IREMAP_CFLAGS) $(C_DEFINES) \
+	EXTRA_CFLAGS="-I$(PKG_BUILD_DIR)/include $(IREMAP_CFLAGS) \
 		      -I$(STAGING_DIR)/usr/include/qca-nss-drv" \
 	KLIB_BUILD="$(LINUX_DIR)" \
 	MODPROBE=true \
