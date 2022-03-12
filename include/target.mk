@@ -52,6 +52,7 @@ DEFAULT_PACKAGES.router:=\
 	luci-app-filetransfer \
 	luci-app-ramfree luci-app-cpufreq \
 	luci-app-upnp \
+	luci-theme-argon \
 	luci-app-turboacc 
 
 ifneq ($(DUMP),)
