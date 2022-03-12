@@ -51,6 +51,7 @@ DEFAULT_PACKAGES.router:=\
 	default-settings luci luci-app-upnp luci-app-autoreboot \
 	luci-app-filetransfer \
 	luci-app-ramfree luci-app-cpufreq \
+	luci-app-upnp \
 	luci-app-turboacc 
 
 ifneq ($(DUMP),)
