@@ -50,7 +50,7 @@ DEFAULT_PACKAGES.router:=\
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
 	default-settings luci luci-app-upnp luci-app-autoreboot \
 	luci-app-filetransfer \
-	luci-app-ramfree luci-app-cpufreq \
+	luci-app-ramfree luci-app-cpufreq-64 \
 	luci-app-upnp \
 	luci-theme-argon \
 	luci-app-turboacc 
