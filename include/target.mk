@@ -44,13 +44,14 @@ DEFAULT_PACKAGES.router:=\
 	dnsmasq-full \
 	firewall \
 	iptables \
+	ipv6helper \
 	ppp \
 	ppp-mod-pppoe \
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
-	default-settings luci luci-app-ddns luci-app-upnp luci-app-autoreboot \
-	luci-app-filetransfer luci-app-vsftpd luci-app-ssr-plus luci-app-unblockmusic luci-app-arpbind \
-	luci-app-vlmcsd luci-app-wol luci-app-ramfree \
-	luci-app-turboacc luci-app-nlbwmon luci-app-accesscontrol ddns-scripts_aliyun ddns-scripts_dnspod
+	default-settings luci luci-app-upnp luci-app-autoreboot \
+	luci-app-filetransfer \
+	luci-app-ramfree luci-app-cpufreq \
+	luci-app-turboacc 
 
 ifneq ($(DUMP),)
   all: dumpinfo
