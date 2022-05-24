@@ -44,11 +44,12 @@ DEFAULT_PACKAGES.router:=\
 	dnsmasq-full \
 	firewall \
 	iptables \
+        ipv6helper \
 	ppp \
 	ppp-mod-pppoe \
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
 	kmod-tun kmod-inet-diag iptables-mod-tproxy iptables-mod-extra ipset ip-full libcap libcap-bin \
-	default-settings luci luci-app-upnp luci-app-autoreboot ruby ruby-yaml \
+	default-settings luci luci-app-upnp luci-app-autoreboot \
         luci-app-ramfree coreutils coreutils-nohup bash curl ca-certificates \
 	luci-app-turboacc 
 
