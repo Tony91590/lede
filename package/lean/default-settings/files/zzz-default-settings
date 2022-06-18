@@ -18,6 +18,10 @@ uci commit wireless && wifi
 uci set network.lan.stp='1'
 uci commit network
 
+chmod +x /etc/init.d/turboacc
+
+chmod +x /etc/init.d/turboacc_fss
+
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/ddns.htm
