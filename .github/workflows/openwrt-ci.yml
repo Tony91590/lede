@@ -12,7 +12,7 @@ name: OpenWrt-CI
 on:
   push:
     branches: 
-      - offload-suite
+      - offload-suite-5.15rc6
   # schedule:
   #   - cron: 0 20 * * *
   release:
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: offload-suite
+          ref: offload-suite-5.15rc6
 
       - name: Space cleanup
         env:
