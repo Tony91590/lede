@@ -2,7 +2,8 @@
 # the system init finished. By default this file does nothing.
 
 uci set network.lan.stp=1
-uci commit 
+uci commit network
 /etc/init.d/network reload
+luci-reload
 
 exit 0
