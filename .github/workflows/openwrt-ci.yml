@@ -12,7 +12,7 @@ name: OpenWrt-CI
 on:
   push:
     branches: 
-      - Donc-qca
+      - Dust
   # schedule:
   #   - cron: 0 20 * * *
   release:
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: Donc-qca
+          ref: Dust
 
       - name: Space cleanup
         env:
