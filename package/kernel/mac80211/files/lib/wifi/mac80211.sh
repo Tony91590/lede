@@ -186,6 +186,7 @@ detect_mac80211() {
 			set wireless.default_radio0.ssid=Tenda_4BA290_5G
 			set wireless.default_radio${devidx}.encryption=psk2
 			set wireless.default_radio${devidx}.key=bettyboop
+			set wireless.default_radio${devidx}.disassoc_low_ack=0
 EOF
 		uci -q commit wireless
 
