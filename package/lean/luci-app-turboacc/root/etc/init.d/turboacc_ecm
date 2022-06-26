@@ -17,4 +17,7 @@
 START=99
 
 start() {
+	echo 1 > /sys/kernel/debug/ecm/front_end_ipv4_stop
+	echo 1 > /sys/kernel/debug/ecm/front_end_ipv6_stop
+	echo 1 > /sys/kernel/debug/ecm/ecm_db/defunct_all
 }
