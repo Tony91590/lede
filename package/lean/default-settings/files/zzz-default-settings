@@ -20,7 +20,6 @@ chmod +x /etc/init.d/turboacc_fss
 chmod +x /etc/init.d/turboacc_nss
 /etc/init.d/turboacc_nss start
 
-
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/ddns.htm
