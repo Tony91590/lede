@@ -18,9 +18,8 @@ uci commit network
 chmod +x /etc/init.d/turboacc
 chmod +x /etc/init.d/turboacc_fss
 chmod +x /etc/init.d/turboacc_nss
-chmod +x /etc/init.d/turboacc_ecm
 /etc/init.d/turboacc_nss start
-/etc/init.d/turboacc_ecm start
+
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
