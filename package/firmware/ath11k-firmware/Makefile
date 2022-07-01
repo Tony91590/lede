@@ -1,4 +1,3 @@
-
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath11k-firmware
