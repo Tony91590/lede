@@ -41,13 +41,18 @@ DEFAULT_PACKAGES.nas:=\
 	mdadm
 # For router targets
 DEFAULT_PACKAGES.router:=\
-	dnsmasq-full firewall iptables ppp ppp-mod-pppoe \
-	block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun \
-	iptables-mod-tproxy iptables-mod-extra ipset ip-full default-settings luci luci-newapi \
-	ddns-scripts_aliyun ddns-scripts_dnspod luci-app-ddns luci-app-upnp luci-app-autoreboot \
-	luci-app-arpbind luci-app-filetransfer luci-app-vsftpd luci-app-ssr-plus luci-app-vlmcsd \
-	luci-app-accesscontrol luci-app-nlbwmon luci-app-turboacc luci-app-wol curl ca-certificates
-
+	dnsmasq-full \
+	firewall \
+	iptables \
+	ipv6helper \
+	ppp \
+	ppp-mod-pppoe \
+	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
+	kmod-tun kmod-inet-diag iptables-mod-tproxy iptables-mod-extra ipset ip-full libcap libcap-bin \
+	default-settings luci luci-app-upnp luci-app-autoreboot luci-theme-argon luci-app-ddns \
+	luci-app-ramfree coreutils coreutils-nohup bash curl ca-certificates luci-app-openvpn-server \
+	ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4 luci-app-ttyd bridger
+	
 ifneq ($(DUMP),)
   all: dumpinfo
 endif
