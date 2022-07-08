@@ -51,7 +51,7 @@ DEFAULT_PACKAGES.router:=\
 	kmod-tun kmod-inet-diag iptables-mod-tproxy iptables-mod-extra ipset ip-full libcap libcap-bin \
 	default-settings luci luci-app-upnp luci-app-autoreboot luci-theme-argon luci-app-ddns \
 	luci-app-ramfree coreutils coreutils-nohup bash curl ca-certificates luci-app-openvpn-server \
-	ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4 luci-app-ttyd bridger
+	ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4 luci-app-ttyd 
 	
 ifneq ($(DUMP),)
   all: dumpinfo
