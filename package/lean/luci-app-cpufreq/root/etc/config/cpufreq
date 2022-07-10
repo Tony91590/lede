@@ -1,5 +1,5 @@
 
 config settings 'cpufreq'
-	option maxfreq '1382400'
-	option minifreq '1017600'
-	option governor 'schedutil'
+	option governor0 'schedutil'
+	option minfreq0 '1017600'
+	option maxfreq0 '1382400'
