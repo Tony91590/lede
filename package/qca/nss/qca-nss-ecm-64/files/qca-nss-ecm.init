@@ -71,6 +71,9 @@ load_ecm() {
 	support_bridge && {
 		sysctl -w net.bridge.bridge-nf-call-ip6tables=0
 		sysctl -w net.bridge.bridge-nf-call-iptables=0
+		echo 1 > /sys/kernel/debug/ecm/front_end_ipv4_stop
+		echo 1 > /sys/kernel/debug/ecm/front_end_ipv6_stop
+		echo 1 > /sys/kernel/debug/ecm/ecm_db/defunct_all
 	}
 }
 
