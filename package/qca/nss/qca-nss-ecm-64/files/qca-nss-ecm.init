@@ -75,34 +75,6 @@ load_ecm() {
 	support_bridge && {
 		sysctl -w net.bridge.bridge-nf-call-ip6tables=1
 		sysctl -w net.bridge.bridge-nf-call-iptables=1
-		#
-		# Stop ECM frontends
-		#
-		echo 1 > /sys/kernel/debug/ecm/front_end_ipv4_stop
-		echo 1 > /sys/kernel/debug/ecm/front_end_ipv6_stop
-
-		#
-		# Defunct the connections
-		#
-	        echo 1 > /sys/kernel/debug/ecm/ecm_db/defunct_all
-		sleep 5;
-
-		rmmod ecm
-		sleep 1
-				#
-		# Stop ECM frontends
-		#
-		echo 1 > /sys/kernel/debug/ecm/front_end_ipv4_stop
-		echo 1 > /sys/kernel/debug/ecm/front_end_ipv6_stop
-
-		#
-		# Defunct the connections
-		#
-	        echo 1 > /sys/kernel/debug/ecm/ecm_db/defunct_all
-		sleep 5;
-
-		rmmod ecm
-		sleep 1
 	}
 }
 
@@ -135,10 +107,8 @@ start() {
 	[ -d /sys/kernel/debug/ecm/ecm_nss_ipv4 ] && sysctl -w dev.nss.general.redirect=1
 
 	support_bridge && {
-		if ([ -z "$(grep "net.bridge.bridge-nf-call-ip6tables=1" /etc/sysctl.d/qca-nss-ecm.conf)" ] && [ -z "$(grep "net.bridge.bridge-nf-call-iptables=1" /etc/sysctl.d/qca-nss-ecm.conf)" ]); then
-			echo 'net.bridge.bridge-nf-call-ip6tables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
-			echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
-		fi
+		echo 'net.bridge.bridge-nf-call-ip6tables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
+		echo 'net.bridge.bridge-nf-call-iptables=1' >> /etc/sysctl.d/qca-nss-ecm.conf
 	}
 
 	if [ -d /sys/module/qca_ovsmgr ]; then
