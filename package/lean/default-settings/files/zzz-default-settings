@@ -12,6 +12,9 @@ uci commit system
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
 
+uci set network.lan.stp=1
+uci commit network
+
 chmod +x /etc/init.d/cpufreq
 chmod +x /etc/init.d/turboacc
 chmod +x /etc/init.d/turboacc_fss
