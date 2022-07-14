@@ -7,62 +7,67 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=ath11k-firmware
-PKG_SOURCE_DATE:=2021-07-20
-PKG_SOURCE_VERSION:=d4003c1921810adcc455d46f17776a3392b29436
-PKG_MIRROR_HASH:=6839081bafbc56d3b8e41d30790b20813c349cbc1732e887347ef5ed3ea717e4
+PKG_NAME:=nss-firmware
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/kvalo/ath11k-firmware.git
+PKG_SOURCE_DATE:=2021-09-14
+PKG_SOURCE_URL:=https://github.com/quic/qca-sdk-nss-fw.git
+PKG_SOURCE_VERSION:=b06171cb0d14360c90a4b8f9f835dc1c4647ea07
+PKG_MIRROR_HASH:=e851d4f6af8aaccbc34a05bc007991a88287913f17c5d9f0172a00745aed6e48
+
+PKG_LICENSE_FILES:=LICENSE.md
 
 PKG_MAINTAINER:=Robert Marko <robimarko@gmail.com>
 
 include $(INCLUDE_DIR)/package.mk
 
-define Package/ath11k-firmware-default
+VERSION_PATH=$(PKG_BUILD_DIR)/QCA_Networking_2021.SPF_11.4/CS
+
+define Package/nss-firmware-default
   SECTION:=firmware
   CATEGORY:=Firmware
   URL:=$(PKG_SOURCE_URL)
-  DEPENDS:=
 endef
 
-define Package/ath11k-firmware-ipq6018
-$(Package/ath11k-firmware-default)
-  TITLE:=ath11k firmware for IPQ6018 devices
+define Package/nss-firmware-ipq6018
+$(Package/nss-firmware-default)
+  DEPENDS:=@TARGET_ipq60xx
+  TITLE:=NSS firmware for IPQ6018 devices
+  NSS_ARCHIVE:=$(VERSION_PATH)/IPQ6018.ATH.11.4/BIN-NSS.CP.11.4.0.5-5-R.tar.bz2
 endef
 
-define Package/ath11k-firmware-ipq8074
-$(Package/ath11k-firmware-default)
-  TITLE:=ath11k firmware for IPQ8074 devices
+define Package/nss-firmware-ipq8074
+$(Package/nss-firmware-default)
+  DEPENDS:=@TARGET_ipq807x
+  TITLE:=NSS firmware for IPQ8074 devices
+  NSS_ARCHIVE:=$(VERSION_PATH)/IPQ8074.ATH.11.4/BIN-NSS.HK.11.4.0.5-5-R.tar.bz2
 endef
 
 define Build/Compile
 	true
 endef
 
-define Package/ath11k-firmware-ipq6018/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath11k/IPQ6018/hw1.0
-	$(INSTALL_DIR) $(1)/lib/firmware/IPQ6018
+define Package/nss-firmware-ipq6018/install
+	mkdir -p $(PKG_BUILD_DIR)/IPQ6018
+	$(TAR) -C $(PKG_BUILD_DIR)/IPQ6018 -xf $(NSS_ARCHIVE) --strip-components=1
+	$(INSTALL_DIR) $(1)/lib/firmware/
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/IPQ6018/hw1.0/2.5.0.1/WLAN.HK.2.5.0.1-01100-QCAHKSWPL_SILICONZ-1/* \
-		$(1)/lib/firmware/IPQ6018/
-	$(INSTALL_DATA) ./files/board-2.bin.IPQ6018 \
-		$(1)/lib/firmware/ath11k/IPQ6018/hw1.0/board-2.bin
-	$(INSTALL_DATA) ./files/qdss_trace_config.bin \
-		$(1)/lib/firmware/ath11k/IPQ6018/hw1.0/qdss_trace_config.bin
+		$(PKG_BUILD_DIR)/IPQ6018/retail_router0.bin \
+		$(1)/lib/firmware/qca-nss0.bin
 endef
 
-define Package/ath11k-firmware-ipq8074/install
-	$(INSTALL_DIR) $(1)/lib/firmware/ath11k/IPQ8074/hw2.0
-	$(INSTALL_DIR) $(1)/lib/firmware/IPQ8074
+define Package/nss-firmware-ipq8074/install
+	mkdir -p $(PKG_BUILD_DIR)/IPQ8074
+	$(TAR) -C $(PKG_BUILD_DIR)/IPQ8074 -xf $(NSS_ARCHIVE) --strip-components=1
+	$(INSTALL_DIR) $(1)/lib/firmware/
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/IPQ8074/hw2.0/board-2.bin \
-		$(1)/lib/firmware/ath11k/IPQ8074/hw2.0/
+		$(PKG_BUILD_DIR)/IPQ8074/retail_router0.bin \
+		$(1)/lib/firmware/qca-nss0.bin
 	$(INSTALL_DATA) \
-		$(PKG_BUILD_DIR)/IPQ8074/hw2.0/2.5.0.1/WLAN.HK.2.5.0.1-01100-QCAHKSWPL_SILICONZ-1/* \
-		$(1)/lib/firmware/IPQ8074/
+		$(PKG_BUILD_DIR)/IPQ8074/retail_router1.bin \
+		$(1)/lib/firmware/qca-nss1.bin
 endef
 
-$(eval $(call BuildPackage,ath11k-firmware-ipq6018))
-$(eval $(call BuildPackage,ath11k-firmware-ipq8074))
+$(eval $(call BuildPackage,nss-firmware-ipq6018))
+$(eval $(call BuildPackage,nss-firmware-ipq8074))
