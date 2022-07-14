@@ -60,6 +60,8 @@ echo "DISTRIB_DESCRIPTION='OpenWrt '" >> /etc/openwrt_release
 sed -i '/log-facility/d' /etc/dnsmasq.conf
 echo "log-facility=/dev/null" >> /etc/dnsmasq.conf
 
+echo '*/1 * * * * /etc/init.d/turboacc_ecm restart' >> /etc/crontabs/root
+
 echo 'hsts=0' > /root/.wgetrc
 
 rm -rf /tmp/luci-modulecache/
