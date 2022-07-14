@@ -50,7 +50,7 @@ DEFAULT_PACKAGES.router:=\
 	luci-newapi block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw \
 	kmod-tun kmod-inet-diag iptables-mod-tproxy iptables-mod-extra ipset ip-full libcap libcap-bin \
 	default-settings luci luci-app-upnp luci-theme-argon luci-app-ddns \
-	luci-app-ramfree coreutils coreutils-nohup bash curl ca-certificates luci-app-openvpn-server \
+	coreutils coreutils-nohup bash curl ca-certificates luci-app-openvpn-server \
 	ddns-scripts_aliyun ddns-scripts_dnspod ddns-scripts_cloudflare.com-v4 luci-app-ttyd 
 	
 ifneq ($(DUMP),)
