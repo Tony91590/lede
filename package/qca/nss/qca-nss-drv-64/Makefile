@@ -1,6 +1,6 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=qca-nss-drv
+PKG_NAME:=qca-nss-drv-64
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-drv.git
@@ -16,7 +16,7 @@ include $(INCLUDE_DIR)/package.mk
 
 NSS_CLIENTS_DIR:=$(TOPDIR)/qca/src/qca-nss-clients
 
-define KernelPackage/qca-nss-drv
+define KernelPackage/qca-nss-drv-64
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
@@ -26,7 +26,7 @@ define KernelPackage/qca-nss-drv
   AUTOLOAD:=$(call AutoLoad,32,qca-nss-drv)
 endef
 
-define KernelPackage/qca-nss-drv/install
+define KernelPackage/qca-nss-drv-64/install
 	$(INSTALL_DIR) $(1)/lib/debug
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/etc/sysctl.d
@@ -41,7 +41,7 @@ define KernelPackage/qca-nss-drv/install
 
 endef
 
-define KernelPackage/qca-nss-drv/Description
+define KernelPackage/qca-nss-drv-64/Description
 This package contains a NSS driver for QCA chipset
 endef
 
@@ -50,10 +50,7 @@ define Build/InstallDev
 	$(CP) $(PKG_BUILD_DIR)/exports/* $(1)/usr/include/qca-nss-drv/
 endef
 
-EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-gmac \
-			   -I$(STAGING_DIR)/usr/include/qca-nss-dp \
-			   -I$(STAGING_DIR)/usr/include/qca-ssdk \
-			   -Wno-unused-variable
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-gmac -I$(STAGING_DIR)/usr/include/qca-nss-dp -I$(STAGING_DIR)/usr/include/qca-ssdk
 
 ifneq (, $(findstring $(CONFIG_TARGET_BOARD), "ipq807x" "ipq60xx"))
 EXTRA_CFLAGS+= -DNSS_MEM_PROFILE_MEDIUM
@@ -66,11 +63,10 @@ endif
 
 DRV_MAKE_OPTS:=
 ifeq ($(LOW_MEM_PROFILE_MAKE_OPTS),y)
-DRV_MAKE_OPTS+= \
-	NSS_DRV_C2C_ENABLE=n \
+DRV_MAKE_OPTS+=NSS_DRV_C2C_ENABLE=n \
 	NSS_DRV_CAPWAP_ENABLE=n \
 	NSS_DRV_CLMAP_ENABLE=n \
-	NSS_DRV_CRYPTO_ENABLE=y \
+	NSS_DRV_CRYPTO_ENABLE=n \
 	NSS_DRV_DTLS_ENABLE=n \
 	NSS_DRV_GRE_ENABLE=n \
 	NSS_DRV_GRE_REDIR_ENABLE=n \
@@ -96,13 +92,7 @@ DRV_MAKE_OPTS+= \
 	NSS_DRV_TUNIPIP6_ENABLE=n \
 	NSS_DRV_VXLAN_ENABLE=n \
 	NSS_DRV_MATCH_ENABLE=n \
-	NSS_DRV_MIRROR_ENABLE=n \
-	NSS_DRV_PPPOE_ENABLE=n \
-	NSS_DRV_VIRT_IF_ENABLE=n \
-	NSS_DRV_VLAN_ENABLE=n \
-	NSS_DRV_BRIDGE_ENABLE=n \
-	NSS_DRV_WIFI_EXT_VDEV_ENABLE=n \
-	NSS_DRV_WIFI_MESH_ENABLE=n
+	NSS_DRV_MIRROR_ENABLE=n
 endif
 
 ifeq ($(CONFIG_TARGET_BOARD), "ipq807x")
@@ -113,6 +103,8 @@ endif
 
 define Build/Configure
 	$(LN) arch/nss_$(SOC).h $(PKG_BUILD_DIR)/exports/nss_arch.h
+	sed -i "s/define NSS_FW_VERSION_MAJOR.*/define NSS_FW_VERSION_MAJOR 11/" $(PKG_BUILD_DIR)/exports/nss_fw_version.h
+	sed -i "s/define NSS_FW_VERSION_MINOR.*/define NSS_FW_VERSION_MINOR 3/" $(PKG_BUILD_DIR)/exports/nss_fw_version.h
 endef
 
 define Build/Compile
@@ -126,4 +118,4 @@ define Build/Compile
 		modules
 endef
 
-$(eval $(call KernelPackage,qca-nss-drv))
+$(eval $(call KernelPackage,qca-nss-drv-64))
