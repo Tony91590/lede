@@ -58,11 +58,7 @@
 
 		local cpu_usage = luci.sys.exec("top -n1 | awk '/^CPU/ { printf(\"%d%%\", 100 - $8) }'") or "6%"
 		local cpu_info = luci.sys.exec("/sbin/cpuinfo") or "ARM Processor x 0 (233MHz, 2.3°C)"
-
-		local eth_info = ""
-		if not has_switch then
-			eth_info = luci.sys.exec("/sbin/ethinfo")
-		end
+		local eth_info = luci.sys.exec("ethinfo")
 
 		local rv = {
 			cpuinfo    = cpu_info,
@@ -738,7 +734,7 @@
 			<%=pcdata(ver.distname)%> <%=pcdata(ver.distversion)%> /
 			<%=pcdata(ver.luciname)%> (<%=pcdata(ver.luciversion)%>)
 		</td></tr>
-		<tr><td width="33%"><%:Kernel Version%></td><td><%=unameinfo.release or "?"%></td></tr>
+		<tr><td width="33%"><%:Kernel Version%></td><td><%=luci.sys.exec("uname -r | awk -F '-' '{print $1}'") or "?"%></td></tr>
 		<tr><td width="33%"><%:Local Time%></td><td id="localtime">-</td></tr>
 		<tr><td width="33%"><%:Uptime%></td><td id="uptime">-</td></tr>
 		<tr><td width="33%"><%:Load Average%></td><td id="loadavg">-</td></tr>
