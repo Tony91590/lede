@@ -1,25 +1,25 @@
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=qca-nss-ecm-64
+PKG_NAME:=qca-nss-ecm
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/cc-qrdk/oss/lklm/qca-nss-ecm
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-nss-ecm.git
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2021-04-29
-PKG_SOURCE_VERSION:=c115aec34867b582e2e5ea79fc5315971e0e953c
-PKG_MIRROR_HASH:=962385b45daa2e552a15018bf2930c2df1f6f575d885375bf935a142b4255da5
+PKG_SOURCE_DATE:=2021-06-15
+PKG_SOURCE_VERSION:=34267065855d32f33264dc3054efb0e8103d627b
+PKG_MIRROR_HASH:=0917659d69c5f3e6067d6671b9393b4b2d6b6cd5a7bacf5e7d6cf842dc906eca
 
 PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/package.mk
 
-define KernelPackage/qca-nss-ecm-64
+define KernelPackage/qca-nss-ecm
   SECTION:=kernel
   CATEGORY:=Kernel modules
   SUBMENU:=Network Support
-  DEPENDS:=@(TARGET_ipq807x||TARGET_ipq60xx) \
-  	+kmod-qca-nss-drv-64 \
+  DEPENDS:=@LINUX_5_10 @(TARGET_ipq807x||TARGET_ipq60xx) \
+  	+kmod-qca-nss-drv \
 	+iptables-mod-extra \
 	+kmod-ipt-conntrack \
 	+kmod-ipt-physdev \
@@ -30,15 +30,15 @@ define KernelPackage/qca-nss-ecm-64
   FILES:=$(PKG_BUILD_DIR)/*.ko
   KCONFIG:=CONFIG_BRIDGE_NETFILTER=y \
 	CONFIG_NF_CONNTRACK_EVENTS=y \
-	CONFIG_NF_CONNTRACK_CHAIN_EVENTS=y \
+	CONFIG_NF_CONNTRACK_CHAIN_EVENTS=n \
 	CONFIG_NF_CONNTRACK_DSCPREMARK_EXT=n
 endef
 
-define KernelPackage/qca-nss-ecm-64/Description
+define KernelPackage/qca-nss-ecm/Description
 This package contains the QCA NSS Enhanced Connection Manager
 endef
 
-define KernelPackage/qca-nss-ecm-64/install
+define KernelPackage/qca-nss-ecm/install
 	$(INSTALL_DIR) $(1)/etc/firewall.d $(1)/etc/init.d $(1)/usr/bin $(1)/lib/netifd/offload $(1)/etc/config $(1)/etc/uci-defaults $(1)/etc/sysctl.d
 	$(INSTALL_DATA) ./files/qca-nss-ecm.firewall $(1)/etc/firewall.d/qca-nss-ecm
 	$(INSTALL_BIN) ./files/qca-nss-ecm.init $(1)/etc/init.d/qca-nss-ecm
@@ -47,6 +47,7 @@ define KernelPackage/qca-nss-ecm-64/install
 	$(INSTALL_DATA) ./files/qca-nss-ecm.uci $(1)/etc/config/ecm
 	$(INSTALL_DATA) ./files/qca-nss-ecm.defaults $(1)/etc/uci-defaults/99-qca-nss-ecm
 	$(INSTALL_BIN) ./files/qca-nss-ecm.sysctl $(1)/etc/sysctl.d/qca-nss-ecm.conf
+	echo 'net.netfilter.nf_conntrack_max=8192' >> $(1)/etc/sysctl.d/qca-nss-ecm.conf
 endef
 
 EXTRA_CFLAGS+=-I$(STAGING_DIR)/usr/include/qca-nss-drv
@@ -93,4 +94,4 @@ define Build/Compile
 		modules
 endef
 
-$(eval $(call KernelPackage,qca-nss-ecm-64))
+$(eval $(call KernelPackage,qca-nss-ecm))
