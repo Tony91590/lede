@@ -1,9 +1,7 @@
+# SPDX-License-Identifier: GPL-3.0-only
 #
-# Copyright (C) 2010-2011 OpenWrt.org
-#
-# This is free software, licensed under the GNU General Public License v2.
-# See /LICENSE for more information.
-#
+# Copyright (C) 2020 Lean <coolsnowwolf@gmail.com>
+# Copyright (C) 2021 ImmortalWrt.org
 
 include $(TOPDIR)/rules.mk
 

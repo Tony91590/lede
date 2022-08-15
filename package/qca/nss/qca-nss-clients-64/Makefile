@@ -3,7 +3,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=qca-nss-clients-64
 PKG_RELEASE:=$(AUTORELEASE)
 
-PKG_SOURCE_URL:=https://source.codeaurora.org/quic/cc-qrdk/oss/lklm/nss-clients
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/nss-clients.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2021-04-29
 PKG_SOURCE_VERSION:=b93c72c1b72c591c2ddc2f0b24f0e2b457720118
@@ -31,7 +31,7 @@ define KernelPackage/qca-nss-drv-bridge-mgr-64
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for NSS bridge manager
-  DEPENDS:=@LINUX_5_10 @TARGET_ipq807x +kmod-qca-nss-drv-64 +kmod-qca-nss-drv-vlan-mgr-64
+  DEPENDS:=@TARGET_ipq807x +kmod-qca-nss-drv-64 +kmod-qca-nss-drv-vlan-mgr-64
   FILES:=$(PKG_BUILD_DIR)/bridge/qca-nss-bridge-mgr.ko
   AUTOLOAD:=$(call AutoLoad,51,qca-nss-bridge-mgr)
 endef
@@ -45,7 +45,7 @@ define KernelPackage/qca-nss-drv-vlan-mgr-64
   CATEGORY:=Kernel modules
   SUBMENU:=Network Devices
   TITLE:=Kernel driver for NSS vlan manager
-  DEPENDS:=@LINUX_5_10 @TARGET_ipq807x +kmod-qca-nss-drv-64
+  DEPENDS:=@TARGET_ipq807x +kmod-qca-nss-drv-64
   FILES:=$(PKG_BUILD_DIR)/vlan/qca-nss-vlan.ko
   AUTOLOAD:=$(call AutoLoad,51,qca-nss-vlan)
 endef
@@ -69,6 +69,11 @@ endif
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-drv-bridge-mgr-64),)
 NSS_CLIENTS_MAKE_OPTS+=bridge-mgr=y
+#enable OVS bridge if ovsmgr is enabled
+ifneq ($(CONFIG_PACKAGE_kmod-qca-ovsmgr),)
+NSS_CLIENTS_MAKE_OPTS+= NSS_BRIDGE_MGR_OVS_ENABLE=y
+EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-ovsmgr
+endif
 endif
 
 ifneq ($(CONFIG_PACKAGE_kmod-qca-nss-drv-vlan-mgr-64),)
