@@ -211,7 +211,7 @@ Signed-off-by: Robert Marko <robimarko@gmail.com>
 +#endif
  		.supports_suspend = false,
  		.hal_desc_sz = sizeof(struct hal_rx_desc_ipq8074),
- 		.supports_regdb = false,
+ 		.fix_l1ss = true,
 --- a/local-symbols
 +++ b/local-symbols
 @@ -148,6 +148,8 @@ ATH11K_DEBUG=
