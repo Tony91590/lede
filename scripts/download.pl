@@ -72,52 +72,27 @@ sub hash_cmd() {
 	return undef;
 }
 
-sub download_cmd {
+sub download_cmd($) {
 	my $url = shift;
 	my $have_curl = 0;
-	my $have_aria2c = 0;
-	my $filename = shift;
-	my @additional_mirrors = @_;
-	my $mirrors_url = "'$url'";
 
-	my @chArray = ('a'..'z', 'A'..'Z', 0..9);
-	my $rfn = join '', map{ $chArray[int rand @chArray] } 0..9;
-	if (open CURL, '-|', 'curl', '--version') {
+	if (open CURL, "curl --version 2>/dev/null |") {
 		if (defined(my $line = readline CURL)) {
 			$have_curl = 1 if $line =~ /^curl /;
 		}
 		close CURL;
 	}
-	if (open ARIA2C, '-|', 'aria2c', '--version') {
-		if (defined(my $line = readline ARIA2C)) {
-			$have_aria2c = 1 if $line =~ /^aria2 /;
-		}
-		close ARIA2C;
-	}
 
-	for my $mirror (@additional_mirrors ) {
-		$mirrors_url = $mirrors_url ." '$mirror /$filename'";
-	}
-
-	if ($have_aria2c) {
-		return join(" ", "touch /dev/shm/${rfn}_spp;",
-			qw(aria2c --stderr -c -x2 -s10 -j10 -k1M), $mirrors_url ,
-			$check_certificate ? () : '--check-certificate=false',
-			"--server-stat-of=/dev/shm/${rfn}_spp",
-			"--server-stat-if=/dev/shm/${rfn}_spp",
-			"-d /dev/shm -o $rfn;",
-			"cat /dev/shm/$rfn;", "rm /dev/shm/$rfn /dev/shm/${rfn}_spp");
-	} elsif ($have_curl) {
-		return (qw(curl -f --connect-timeout 20 --retry 5 --location),
+	return $have_curl
+		? (qw(curl -f --connect-timeout 20 --retry 5 --location),
 			$check_certificate ? () : '--insecure',
 			shellwords($ENV{CURL_OPTIONS} || ''),
-			$url);
-	} else {
-		return (qw(wget --tries=5 --timeout=20 --output-document=-),
+			$url)
+		: (qw(wget --tries=5 --timeout=20 --output-document=-),
 			$check_certificate ? () : '--no-check-certificate',
 			shellwords($ENV{WGET_OPTIONS} || ''),
-			$url);
-	}
+			$url)
+	;
 }
 
 my $hash_cmd = hash_cmd();
@@ -127,7 +102,6 @@ sub download
 {
 	my $mirror = shift;
 	my $download_filename = shift;
-	my @additional_mirrors = @_;
 
 	$mirror =~ s!/$!!;
 
@@ -174,9 +148,9 @@ sub download
 			}
 		};
 	} else {
-		my @cmd = download_cmd("$mirror/$download_filename", $download_filename, @additional_mirrors);
+		my @cmd = download_cmd("$mirror/$download_filename");
 		print STDERR "+ ".join(" ",@cmd)."\n";
-		open(FETCH_FD, '-|', @cmd) or die "Cannot launch aria2c, curl or wget.\n";
+		open(FETCH_FD, '-|', @cmd) or die "Cannot launch curl or wget.\n";
 		$hash_cmd and do {
 			open MD5SUM, "| $hash_cmd > '$target/$filename.hash'" or die "Cannot launch $hash_cmd.\n";
 		};
@@ -335,11 +309,10 @@ while (!-f "$target/$filename") {
 	my $mirror = shift @mirrors;
 	$mirror or die "No more mirrors to try - giving up.\n";
 
-	download($mirror, $url_filename, @mirrors);
+	download($mirror, $url_filename);
 	if (!-f "$target/$filename" && $url_filename ne $filename) {
-		download($mirror, $filename, @mirrors);
+		download($mirror, $filename);
 	}
-	@mirrors=();
 }
 
 $SIG{INT} = \&cleanup;
