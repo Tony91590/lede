@@ -1,3 +1,4 @@
+
 module("luci.controller.cpufreq", package.seeall)
 
 function index()
@@ -5,5 +6,5 @@ function index()
 		return
 	end
 
-	entry({"admin", "system", "cpufreq"}, cbi("cpufreq"), _("CPU Freq"), 900).dependent = false
+	entry({"admin", "services", "cpufreq"}, cbi("cpufreq"), _("CPU Freq"), 900).dependent = false
 end
