@@ -20,4 +20,4 @@ else
 	sys_temp="$(awk '{ printf("%.1f°C ", $0) }' /sys/class/thermal/thermal_zone0/temp)"
 fi
 
-echo -n "${cpu_arch} x ${cpu_cores} (${cpu_freq}, ${sys_temp})"
+echo -n "${cpu_arch} x ${cpu_cores} (${big_cpu_freq}${cpu_freq}, ${sys_temp})"
