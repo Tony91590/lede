@@ -7,7 +7,10 @@ board=$(board_name)
 board_config_update
 
 case $board in
-xiaomi,ax3600|\
+xiaomi,ax3600)
+	ucidef_set_led_netdev "wan" "WAN" "blue:network" "eth0"
+	ucidef_set_led_netdev "lan" "LAN" "blue:aiot" "eth0"
+	;;
 redmi,ax6)
 	ucidef_set_led_netdev "wan" "WAN" "blue:network" "eth0"
 	;;
