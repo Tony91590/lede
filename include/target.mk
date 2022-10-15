@@ -45,7 +45,7 @@ DEFAULT_PACKAGES.router:=\
 	block-mount coremark kmod-nf-nathelper kmod-nf-nathelper-extra kmod-ipt-raw kmod-tun \
 	iptables-mod-tproxy iptables-mod-extra ipset ip-full default-settings luci luci-newapi \
 	ddns-scripts_aliyun ddns-scripts_dnspod luci-app-ddns luci-app-upnp luci-app-autoreboot \
-	luci-app-openvpn-server curl ca-certificates
+	luci-app-openvpn-server curl ca-certificates luci-theme-argon
 
 ifneq ($(DUMP),)
   all: dumpinfo
