@@ -3,12 +3,20 @@
 uci set luci.main.lang=fr
 uci commit luci
 
-uci set system.@system[0].timezone=CST-8
-uci set system.@system[0].zonename=Asia/Shanghai
+uci set system.@system[0].timezone=CET-1CEST,M3.5.0,M10.5.0/3
+uci set system.@system[0].zonename=Europe/Paris
+uci set system.led_wan.mode='link'
+uci set system.led_lan.mode='link'
 uci commit system
 
 uci set fstab.@global[0].anon_mount=1
 uci commit fstab
+
+chmod +x /etc/init.d/cpufreq
+chmod +x /etc/init.d/turboacc
+chmod +x /etc/init.d/turboacc_fss
+/etc/init.d/cpufreq start
+/etc/init.d/turboacc start
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
