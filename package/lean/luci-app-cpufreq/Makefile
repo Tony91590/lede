@@ -10,9 +10,9 @@ LUCI_TITLE:=LuCI for CPU Freq Setting
 LUCI_DEPENDS:=@(aarch64||arm)
 LUCI_PKGARCH:=all
 
-PKG_NAME:=luci-app-cpufreq-64
-PKG_VERSION:=1
-PKG_RELEASE:=7
+PKG_NAME:=luci-app-cpufreq
+PKG_VERSION:=2
+PKG_RELEASE:=9
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
