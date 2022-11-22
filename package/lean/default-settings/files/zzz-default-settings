@@ -17,11 +17,9 @@ chmod +x /etc/init.d/cpufreq
 chmod +x /etc/init.d/turboacc
 chmod +x /etc/init.d/turboacc_fss
 chmod +x /etc/init.d/turboacc_nss
-chmod +x /etc/init.d/turboacc_ecm
 /etc/init.d/cpufreq start
 /etc/init.d/turboacc start
 /etc/init.d/turboacc_nss start
-/etc/init.d/turboacc_ecm start
 
 rm -f /usr/lib/lua/luci/view/admin_status/index/mwan.htm
 rm -f /usr/lib/lua/luci/view/admin_status/index/upnp.htm
@@ -56,8 +54,6 @@ echo "DISTRIB_DESCRIPTION='OpenWrt '" >> /etc/openwrt_release
 
 sed -i '/log-facility/d' /etc/dnsmasq.conf
 echo "log-facility=/dev/null" >> /etc/dnsmasq.conf
-
-echo '*/1 * * * * /etc/init.d/turboacc_ecm restart' >> /etc/crontabs/root
 
 echo 'hsts=0' > /root/.wgetrc
 
