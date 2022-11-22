@@ -19,6 +19,6 @@ DEFAULT_PACKAGES += \
 	kmod-qca-nss-dp kmod-qca-nss-drv-64 kmod-qca-nss-crypto nss-eip-firmware \
 	kmod-qca-nss-drv-pppoe-64 kmod-qca-nss-ecm-64 luci-app-turboacc-64 \
 	kmod-qca-nss-drv-bridge-mgr-64 kmod-qca-drv-vlan-mgr-64 luci-app-cpufreq-64 \
-	nss-firmware-ipq8074 ath11k-board-ipq8074 qca-ssdk-shell kmod-qca-ssdk-nohnat uboot-envtools
+	nss-firmware-ipq8074 qca-ssdk-shell kmod-qca-ssdk-nohnat uboot-envtools
 
 $(eval $(call BuildTarget))
