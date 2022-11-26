@@ -80,7 +80,6 @@ jobs:
           CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
           CONFIG_KERNEL_BUILD_DOMAIN="Azure"
           CONFIG_ATH11K_MEM_PROFILE_512MB=y
-          CONFIG_ATH11K_NSS_SUPPORT=y
           EOF
 
           
