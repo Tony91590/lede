@@ -105,7 +105,7 @@ Link: https://lore.kernel.org/r/20210721173615.75637-2-jouni@codeaurora.org
 +		arg->peer_bw_rxnss_override = ATH11K_BW_NSS_MAP_ENABLE;
 +
 +		if (!rx_nss) {
-+			ath11k_warn(ar->ab, "invalid max_nss\n");
++			//ath11k_warn(ar->ab, "invalid max_nss\n");
 +			return;
 +		}
 +
