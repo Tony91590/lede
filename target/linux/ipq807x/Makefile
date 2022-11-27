@@ -17,7 +17,7 @@ DEFAULT_PACKAGES += \
 	ath11k-firmware-ipq8074 kmod-ath11k-ahb \
 	autocore-arm htop wpad-openssl luci-app-cpufreq \
 	kmod-qca-nss-dp kmod-qca-nss-drv \
-	kmod-qca-nss-drv-pppoe kmod-qca-nss-ecm-64 \
+	kmod-qca-nss-drv-pppoe kmod-qca-nss-ecm \
 	kmod-qca-nss-drv-bridge-mgr kmod-qca-drv-vlan-mgr \
 	nss-firmware-ipq8074 ath11k-board-ipq8074 qca-ssdk-shell kmod-qca-ssdk-nohnat uboot-envtools
 
