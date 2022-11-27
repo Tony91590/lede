@@ -3,11 +3,11 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=qca-ssdk
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/ssdk-shell.git
+PKG_SOURCE_URL:=https://git.codelinaro.org/clo/qsdk/oss/lklm/qca-ssdk.git
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2022-03-16
-PKG_SOURCE_VERSION:=72a7dc725ae9ccbe7d99f451a6518e7c0dde4740
-PKG_MIRROR_HASH:=a591875ad05d7a6779cf9da575d890bc470889308f239c89a14721924420ac2b
+PKG_SOURCE_DATE:=2022-04-07
+PKG_SOURCE_VERSION:=62955de3c838028d3f72313eef99c57fa4babb71
+PKG_MIRROR_HASH:=84c7de6d1ce82fb15acebea0e44158695a33ed6f18335da32ec9f248dcb4b285
 
 LOCAL_VARIANT=$(patsubst qca-ssdk-%,%,$(patsubst qca-ssdk-%,%,$(BUILD_VARIANT)))
 
