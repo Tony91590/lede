@@ -12,7 +12,7 @@ name: OpenWrt-CI
 on:
   push:
     branches: 
-      - GREAT     
+      - proto-type    
   # schedule:
   #   - cron: 0 20 * * *
   release:
@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: GREAT
+          ref: proto-type
 
       - name: Space cleanup
         env:
@@ -80,6 +80,7 @@ jobs:
           CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
           CONFIG_KERNEL_BUILD_DOMAIN="Azure"
           CONFIG_ATH11K_MEM_PROFILE_512MB=y
+          CONFIG_ATH11K_NSS_SUPPORT=y
           EOF
 
           
