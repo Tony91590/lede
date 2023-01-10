@@ -8,6 +8,24 @@ uci set system.@system[0].zonename=Europe/Paris
 uci set system.@system[0].cronloglevel='9'
 uci set system.led_wan.mode='link'
 uci set system.led_lan.mode='link'
+
+
+
+uci set system.led_wlan5g=led
+uci set system.led_wlan5g.name='WLAN5G'
+uci set  system.led_wlan5g.sysfs='net_blue'
+uci set system.led_wlan5g.default='1'
+uci set system.led_wlan5g.trigger='none'
+uci set system.led_wan=led
+uci set system.led_wan.name='WAN'
+uci set system.led_wan.sysfs='net_blue'
+uci set system.led_wan.default='1'
+uci set system.led_wan.trigger='none'
+uci set system.led_wlan5g2=led
+uci set system.led_wlan5g2.name='WLAN5G2'
+uci set system.led_wlan5g2.sysfs='led_ant'
+uci set system.led_wlan5g2.default='1'
+uci set system.led_wlan5g2.trigger='none'
 uci commit system
 
 uci set fstab.@global[0].anon_mount=1
