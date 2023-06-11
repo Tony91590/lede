@@ -692,13 +692,19 @@
 
 			if (e = document.getElementById('memtotal'))
 				e.innerHTML = progressbar(
-					Math.floor(((info.memory.free + info.memory.buffered) / 1048576) + (info.memcached / 1024)) + " <%:MB%>",
+					Math.floor((info.memory.free + info.memory.buffered) / 1048576) + " <%:MB%>",
+					Math.floor(info.memory.total / 1048576) + " <%:MB%>"
+				);
+
+			if (e = document.getElementById('memfree'))
+				e.innerHTML = progressbar(
+					Math.floor((info.memory.total - info.memory.free) / 1048576) + " <%:MB%>",
 					Math.floor(info.memory.total / 1048576) + " <%:MB%>"
 				);
 
 			if (e = document.getElementById('membuff'))
 				e.innerHTML = progressbar(
-					Math.floor(info.memory.buffered / 1048576) + " <%:MB%>",
+					Math.floor(info.memcached / 1024) + " <%:MB%>",
 					Math.floor(info.memory.total / 1048576) + " <%:MB%>"
 				);
 
@@ -747,7 +753,8 @@
 
 	<table width="100%" cellspacing="10">
 		<tr><td width="33%"><%:Total Available%></td><td id="memtotal">-</td></tr>
-		<tr><td width="33%"><%:Buffered%></td><td id="membuff">-</td></tr>
+		<tr><td width="33%"><%:Used%></td><td id="memfree">-</td></tr>
+		<tr><td width="33%"><%:Cached%></td><td id="membuff">-</td></tr>
 	</table>
 </fieldset>
 
