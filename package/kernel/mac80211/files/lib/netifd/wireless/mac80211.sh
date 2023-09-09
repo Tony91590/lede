@@ -738,8 +738,7 @@ mac80211_prepare_vif() {
 		;;
 	esac
 
-	# We do not set hostpad macaddr if it is 00:00:00:00:00:00
-	if [ "$mode" != "ap" ] && [ "$macaddr" != "00:00:00:00:00:00" ]; then
+	if [ "$mode" != "ap" ]; then
 		# ALL ap functionality will be passed to hostapd
 		# All interfaces must have unique mac addresses
 		# which can either be explicitly set in the device
