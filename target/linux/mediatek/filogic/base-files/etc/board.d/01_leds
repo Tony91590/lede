@@ -10,7 +10,7 @@ xiaomi,mi-router-wr30u)
 	ucidef_set_led_netdev "wan" "wan" "blue:internet" "wan"
 	;;
 xiaomi,redmi-router-ax6000)
-	ucidef_set_led_netdev "wan" "wan" "rgb:network" "wan" "link"
+	ucidef_set_led_netdev "wan" "wan" "rgb:network" "wan"
 	;;
 esac
 
