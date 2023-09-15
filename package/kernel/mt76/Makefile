@@ -555,6 +555,8 @@ define KernelPackage/mt7986-firmware/install
 		$(PKG_BUILD_DIR)/firmware/mt7986_wm.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7986_rom_patch_mt7975.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7986_rom_patch.bin \
+                $(PKG_BUILD_DIR)/firmware/mt7986_wo_0.bin \
+		$(PKG_BUILD_DIR)/firmware/mt7986_wo_1.bin \
 		$(1)/lib/firmware/mediatek
 endef
 
