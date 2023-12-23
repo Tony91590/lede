@@ -185,3 +185,17 @@ define Device/xiaomi_redmi-router-ax6000
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000
+
+define Device/glinet_gl-mt6000
+  DEVICE_VENDOR := GL.iNet
+  DEVICE_MODEL := GL-MT6000
+  DEVICE_DTS := mt7986a-glinet-gl-mt6000
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb3 kmod-mt7986-firmware mt7986-wo-firmware e2fsprogs f2fsck mkf2fs
+  IMAGES := sysupgrade.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+  ARTIFACTS := preloader.bin bl31-uboot.fip
+  ARTIFACT/preloader.bin := bl2 emmc-ddr4
+  ARTIFACT/bl31-uboot.fip := bl31-uboot glinet_gl-mt6000
+endef
+TARGET_DEVICES += glinet_gl-mt6000
