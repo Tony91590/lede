@@ -81,6 +81,16 @@ define Device/asus_tuf-ax4200
 endef
 TARGET_DEVICES += asus_tuf-ax4200
 
+define Device/asus_rt-ax59u
+  DEVICE_VENDOR := ASUS
+  DEVICE_MODEL := RT-AX59U
+  DEVICE_DTS := mt7986a-asus-rt-ax59u
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-usb3 kmod-mt7986-firmware mt7986-wo-firmware
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += asus_rt-ax59u
+
 define Device/bananapi_bpi-r3
   DEVICE_VENDOR := Bananapi
   DEVICE_MODEL := BPi-R3
@@ -481,13 +491,3 @@ define Device/xiaomi_redmi-router-ax6000
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000
-
-define Device/asus_rt-ax59u
-  DEVICE_VENDOR := ASUS
-  DEVICE_MODEL := RT-AX59U
-  DEVICE_DTS := mt7986a-asus-rt-ax59u
-  DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-usb3 kmod-mt7986-firmware mt7986-wo-firmware
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-endef
-TARGET_DEVICES += asus_rt-ax59u
