@@ -34,17 +34,12 @@ local devs = mtkwifi.get_all_devs()
                         <img src="/luci-static/resources/icons/wifi_big.png" style="float:left; margin-right:10px" />
                     </td>
                     <td colspan="2" style="text-align:left">
-                        <big><strong title="<%=dev.profile%>"><%=dev.devname%></strong></big>
+                        <big><strong title="<%=dev.profile%>"> Generic Mediatek <%=dev.devname%></strong></big>
                         <%
                         local diff = mtkwifi.diff_profile(dev.profile)
-                        if next(diff) ~= nil then
-                        %>
-                            <span style="color:red;">* need reload to apply changes</span>
-                        <% 
-                        end
                         %>
                         <br/>
-                        <span> work mode: <% if dev.ApCliEnable == "1" then %> APCli <% else %> AP<% end %> <!--  <br/> driver: <%=dev.version%> --></span>
+                        <span><strong>work mode:</strong>  <% if dev.ApCliEnable == "1" then %> APCli <% else %> Master AP<% end %> </span>
                     </td>
                     <td style="width:310px;text-align:right">
                         <input class="cbi-button cbi-button-reload" style="width:100px" title="Reload WiFi network" value="Reload" type="button" onclick='wifi_reload("<%=luci.dispatcher.build_url("admin", "mtk", "wifi", "reload", dev.devname)%>");' />
