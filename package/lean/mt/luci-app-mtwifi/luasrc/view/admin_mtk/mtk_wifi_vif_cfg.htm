@@ -372,19 +372,7 @@ end
       </tfoot>
     </table>
 
-    <pre>
-# 1. one MAC one line.
-# 2. empty lines will be ignored.
-# 3. lines start with "#" will be ignored.
-# 4. invalid MAC will be ignored.
 
-11:22:33:44:55:66
-AA:BB:CC:DD:EE:FF
-11:22:33:aa:bb:cc</pre>
-    <textarea name="__maclist" id="__maclist" style="width:98%; height: 200px;"><%
-    local list = cfgs["AccessControlList"..(vifidx-1)] or ""
-    print(table.concat(list:split(";"), "\n"))
-    %></textarea>
 
   </fieldset>
 
